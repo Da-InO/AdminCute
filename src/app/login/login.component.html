@@ -1,0 +1,47 @@
+<div class="bg-wrapper">
+    <div class="bg-grad-custom"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card border-0 shadow rounded-3 my-5">
+            <div class="card-body p-4 p-sm-5">
+              <!-- Imagen de TikTok arriba del título -->
+              <div class="text-center mb-4">
+                <img src="assets/Tiktoc.png" alt="TikTok" class="img-fluid" style="max-width: 150px;">
+              </div>
+              <!-- Título con negrita -->
+              <h5 class="card-title text-center mb-5 fw-bold fs-5">Administración</h5>
+              <form (ngSubmit)="onSubmit()">
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="floatingInput" placeholder="nombre@ejemplo.com" [(ngModel)]="email" name="email" required #emailInput>
+                  <label for="floatingInput" class="fw-bold">Correo electrónico</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña" [(ngModel)]="password" name="password" required>
+                  <label for="floatingPassword" class="fw-bold">Contraseña</label>
+                </div>
+      
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck" [(ngModel)]="rememberPassword" name="rememberPassword">
+                  <label class="form-check-label fw-Ligth" for="rememberPasswordCheck">
+                    Recordar contraseña
+                  </label>
+                </div>
+                <div class="d-grid">
+                  <button class="btn btn-primary btn-login text-uppercase fw-Ligth" type="submit" [disabled]="!emailRegex.test(email) || !password">Iniciar sesión</button>
+                </div>
+                <div *ngIf="showError" class="alert alert-danger mt-3" role="alert">
+                  {{errorMessage}}
+                </div>
+                <hr class="my-4">
+              </form>
+              <div class="text-center mt-3">
+                ¿No tienes una cuenta? <a href="register" class="fw-Ligth">Regístrate aquí</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

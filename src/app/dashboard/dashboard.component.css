@@ -1,0 +1,273 @@
+/* Sidebar */
+.sidebar {
+    background-color: #ffffff;
+    color: #fff;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    z-index: 1;
+    overflow-y: auto;
+    transition: width 0.5s ease-in-out;
+}
+
+.sidebar ul li a i {
+    vertical-align: middle;
+}
+
+.sidebar ul li a span {
+    margin-left: 10px;
+    vertical-align: middle;
+    text-align: left;
+    /* Alineación del texto a la izquierda */
+}
+
+.sidebar.collapsed {
+    width: 60px;
+}
+
+.sidebar-header i {
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition: font-size 0.5s ease-in-out;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    transition: padding 0.5s ease-in-out;
+}
+
+.sidebar ul li a {
+    padding: 10px 20px;
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    transition: padding 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    /* Alineación de los íconos cuando el menú está colapsado */
+}
+
+.sidebar ul li a:hover {
+    background-color: #FF004F;
+}
+
+.sidebar ul li.active > a {
+    background-color: #ffffff; /* Fondo para el ítem activo */
+    color: #FF4500; /* Cambiar el color del texto */
+}
+
+.sidebar ul li.active > a i {
+    color: #FF4500; /* Cambiar el color del icono */
+}
+
+.sidebar ul ul {
+    padding-left: 20px;
+}
+
+.sidebar ul ul li a {
+    font-size: 0.9em;
+    padding: 10px 30px;
+}
+
+.sidebar ul ul li a:hover {
+    background-color: #ffffff;
+}
+
+.sidebar ul ul ul {
+    padding-left: 40px;
+}
+
+.sidebar ul ul ul li a {
+    font-size: 0.8em;
+    padding: 10px 40px;
+}
+
+.sidebar.collapsed .sidebar-header i {
+    transform: rotate(-90deg);
+    transition: transform 0.5s ease-in-out;
+}
+
+.sidebar.collapsed .sidebar-header h3 {
+    display: none;
+}
+
+.sidebar.collapsed ul li a {
+    padding: 10px;
+    margin: 0;
+    justify-content: center;
+    text-align: left;
+    /* Alineación del texto cuando el menú está expandido */
+}
+
+.sidebar.collapsed ul li a span {
+    display: none;
+}
+
+.sidebar.collapsed ul li.active > a {
+    border-radius: 50%;
+}
+
+/* Main content */
+main {
+    margin-left: 250px; /* Ancho del sidebar */
+    padding: 20px;
+    transition: margin-left 0.5s ease-in-out;
+}
+
+.main-collapsed {
+    margin-left: 60px;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .sidebar-header h3 {
+        display: none;
+    }
+
+    .sidebar ul li a span {
+        display: none;
+    }
+
+    .sidebar ul li a i {
+        padding-right: 0;
+    }
+
+    .sidebar ul ul li a {
+        padding: 10px 20px;
+    }
+
+    .sidebar-header h3 {
+        display: none;
+    }
+
+    .sidebar ul li a span {
+        display: none;
+    }
+
+    .sidebar ul li a i {
+        padding-right: 0;
+    }
+
+    .sidebar ul ul li a {
+        padding: 10px 20px;
+    }
+
+    .sidebar ul ul ul li a {
+        padding: 10px 30px;
+    }
+
+    .sidebar ul li a {
+        justify-content: center;
+        /* Alineación de los íconos al centro */
+        text-align: center;
+        /* Alineación del texto al centro */
+    }
+
+    main {
+        margin-left: 0.5rem;
+        padding: 5px;
+    }
+}
+
+/* Mostrar topbar solo en dispositivos móviles */
+@media (min-width: 768px) {
+    .topbar {
+        display: none;
+    }
+}
+
+/* Barra de menu */
+.topbar-header {
+    background-color: #ffffff;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.topbar-header h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.topbar-header i {
+    font-size: 24px;
+    cursor: pointer;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Enlaces del menu */
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    display: none;
+}
+
+.menu li {
+    border-bottom: 1px solid #ccc;
+}
+
+.menu li:last-child {
+    border-bottom: none;
+}
+
+.menu a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.menu a i {
+    margin-right: 1rem;
+}
+
+.menu a:hover {
+    background-color: #f5f5f5;
+}
+
+/* Mostrar menu al hacer click en el botón */
+.show-menu .menu {
+    display: block;
+}
+
+.show-menu .topbar-header i {
+    transform: rotate(90deg);
+}
+
+/* Asegurarte de que la imagen se ajuste bien al diseño */
+.sidebar-logo {
+    width: 50%; /* Ajusta el tamaño de la imagen */
+    height: auto;
+    max-width: 120px; /* Ajusta este valor según sea necesario */
+}
+
+
+

@@ -1,0 +1,613 @@
+.dashboard-container {
+    display: flex;
+    height: 100vh;   
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    padding-top: 20px;
+}
+
+.logo img {
+    width: 100%;
+    max-width: 150px;
+    margin: 0 auto;
+    display: block;
+}
+
+.nav-links {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 40px;
+}
+
+.nav-links li {
+    padding: 15px 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el icono y el texto */
+}
+
+.nav-links li a:hover {
+    color: #ff6600; /* Cambia solo el color del texto e ícono */
+}
+
+.nav-links li a i {
+    color: inherit; /* Asegura que el icono cambie de color junto con el texto */
+}
+
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    height: calc(100vh - 80px);
+}
+
+.main-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: #ff3366;
+    border-radius: 5px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+    background: #e53050;
+}
+
+/* Header */
+.header-container {
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile span {
+    font-size: 16px;
+    color:#333;
+}
+
+/* Extraction Form */
+.extraction-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 50px; /* Ajusta el valor según el espacio que desees */
+}
+.extraction-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+/* Input Containers */
+.form-group .input-container {
+    display: flex;
+    gap: 100px;
+    align-items: center;
+}
+
+.search-input, .date-range {
+    display: flex;
+    gap: 5px;
+}
+
+.search-input input, .date-range input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.date-range span {
+    font-size: 14px;
+    color: #777;
+}
+
+.date-range label {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Botón 'Borrar Filtros' con degradado */
+.borrar-filtros {
+    background: linear-gradient(45deg, #ff6600, #ff3366);
+    color: white;
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.borrar-filtros:hover {
+    background: linear-gradient(45deg, #ff9944, #e53050);
+}
+
+.borrar-filtros:focus {
+    outline: none;
+}
+
+/* Categorías */
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Botones de categorías sin degradado en estado normal */
+.category-btn {
+    padding: 0.5px 16px;
+    font-size: 12.50px;
+    background-color: #ddd; /* Color sólido en estado normal */
+    color: black;
+    border: 1px solid #ccc; /* Establece un borde gris delgado */
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.category-btn:hover {
+    background: linear-gradient(45deg, #ff6600, #ff3366);
+    color: white;
+}
+
+.category-btn:focus {
+    outline: none;
+}
+/* Botón 'Extraer Películas' con degradado */
+.extract-btn {
+    background: linear-gradient(45deg, #ff6600, #ff3366);
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    width: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+.extract-btn:hover {
+    background: linear-gradient(45deg, #ff9944, #e53050);
+}
+
+/* Slider */
+.form-group input[type="range"] {
+    width: 200px;
+    height: 10px;
+    border-radius: 10px;
+    background: #ddd;
+    outline: none;
+    margin: 0 auto;
+}
+
+.form-group input[type="range"]::-webkit-slider-runnable-track {
+    height: 10px;
+    background: #ff6600;
+    border-radius: 10px;
+}
+
+.form-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #ff3366;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.form-group input[type="range"]:focus {
+    outline: none;
+}
+
+.form-group .range-labels span {
+    margin-right: 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Search Input Style */
+.search-input {
+    position: relative;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 6px 10px;
+    border-radius: 50px;
+}
+
+.search-input input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #777;
+}
+
+.search-input .search-icon {
+    position: absolute;
+    right: 10px;
+    font-size: 16px;
+    color: #777;
+}
+
+/* Date Range */
+.date-range {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.date-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.date-input input[type="date"] {
+    padding: 10px 40px 10px 20px;
+    border: 1px solid #ddd; /* Color de borde gris */
+    border-radius: 50px;
+    font-size: 14px;
+    color: #333;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2; /* Fondo gris claro */
+}
+
+.calendar-icon {
+    position: absolute;
+    right: 15px; /* Ajusta el icono para que esté cerca del borde derecho */
+    color: #777;
+    font-size: 16px;
+    cursor: pointer;
+    pointer-events: none; /* Hace que el icono no interfiera con el clic en el campo */
+}
+
+
+
+/* Profile Container */
+.profile-container {
+    background: linear-gradient(45deg, #ff6600, #ff3366);
+    padding: 10px 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.profile span {
+    font-size: 16px;
+    color: white;
+}
+
+
+.form-group input[type="range"] {
+    -webkit-appearance: none;
+    width: 200px; /* Ajuste a tamaño pequeño */
+    height: 8px; /* Mantiene la altura pequeña */
+    background: linear-gradient(to right, #ff6600 0%, #ff6600 var(--value, 50%), #ddd var(--value, 50%), #ddd 100%);
+    border-radius: 10px;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+
+.form-group input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 10px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #ff6600 var(--value, 50%), #ddd 0%);
+}
+
+.form-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px; /* Tamaño del punto negro */
+    height: 16px;
+    background: #333;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Para navegadores que soportan ::-moz-range-track */
+.form-group input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 10px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #ff6600 var(--value, 50%), #ddd 0%);
+}
+
+.form-group input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #333;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+}
+
+/* CSS para aplicar el color dinámico */
+.form-group input[type="range"]:focus {
+    outline: none;
+}
+
+/* Botón deshabilitado */
+.extract-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Contenedor de la barra de progreso */
+.progress-container {
+    position: relative;
+    margin-top: 20px;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* Barra de progreso animada */
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6600, #ff3366);
+    transition: width 0.5s ease;
+}
+
+/* Texto de carga */
+.loading-text {
+    display: block;
+    text-align: center;
+    color: #ff3366;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Contenedor Superior */
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    height: 80px;
+}
+
+.logo img {
+    width: 100px; /* Ajusta el tamaño según prefieras */
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(45deg, #ff6600, #ff3366);
+    padding: 10px 15px;
+    border-radius: 20px;
+    color: white;
+    gap: 10px;
+}
+
+.profile img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.profile span {
+    font-size: 16px;
+    color: white;
+}
+
+/* Contenedor Principal */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto; /* Permitir desplazamiento */
+}
+
+
+/* Contenedor Superior */
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff; /* Fondo blanco */
+    width: 100%;
+    border-bottom: 1px solid #ddd; /* Borde sutil */
+    height: 80px;
+    box-shadow: none; /* Elimina cualquier sombra */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #ffffff; /* Cambiado a blanco */
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 80px;
+    bottom: 0;
+    left: 0;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+
+
+.logo img {
+    width: 100px; /* Ajusta el tamaño según prefieras */
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(45deg, #ff6600, #ff3366);
+    padding: 10px 15px;
+    border-radius: 20px;
+    color: white;
+    gap: 10px;
+}
+
+.profile img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.profile span {
+    font-size: 16px;
+    color: white;
+}
+
+
+/* Clase para el elemento activo en la barra lateral */
+.nav-links li a.active {
+    color: #ff6600;
+}
+
+/* Clase para el elemento activo en la barra lateral */
+.nav-links .active {
+    color: #ff6600; /* Cambia el color según tu preferencia */
+    font-weight: bold;
+}
+
+.nav-links .active i {
+    color: #ff6600; /* Cambia también el color del icono */
+}
+
+
+.completion-message {
+    text-align: left;
+    font-size: 18px;
+    margin: 20px 0;
+    color: #333;
+}
+
+.peliculas-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.pelicula-card {
+    width: 200px; /* Ajusta el ancho de la tarjeta */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 15px;
+}
+
+.pelicula-card img {
+    width: 100%;
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 8px;
+}
+
+.pelicula-card h4 {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.pelicula-card p {
+    font-size: 14px;
+    color: #666;
+    margin: 10px 0;
+}
+
+.tags-one, .categories-one{
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+/* Estilo para las etiquetas de información (tiempo, año, clasificación) */
+.info-tag {
+    padding: 4px 10px;
+    font-size: 14px;
+    color: #333;
+    background-color: #ddd; /* Fondo gris claro */
+    border: 1px solid #ccc; /* Borde gris */
+    border-radius: 20px; /* Bordes redondeados */
+    display: inline-block;
+    margin: 5px 3px; /* Espacio entre las etiquetas */
+}
+

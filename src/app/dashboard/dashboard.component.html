@@ -1,0 +1,77 @@
+<!-- Sidebar -->
+<nav class="sidebar">
+    <div class="sidebar-header">
+      <img src="assets/Tiktoc.png" alt="Panel de TikTok" class="sidebar-logo">
+    </div>
+    <ul class="list-unstyled components">
+      <!-- Dashboard link: Exact match only -->
+      <li [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+        <a [routerLink]="['/dashboard']">
+          <i class="fas fa-home"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+  
+      <!-- Subroutes under dashboard (these will use exact: false) -->
+      <li [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: false }">
+        <a [routerLink]="['/dashboard/search']">
+          <i class="fas fa-search"></i> 
+          <span>Busqueda</span>
+        </a>
+      </li>
+  
+      <li [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: false }">
+        <a [routerLink]="['/dashboard/users']">
+          <i class="fas fa-users"></i> 
+          <span>Usuarios</span>
+        </a>
+      </li>
+  
+      <li [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: false }">
+        <a [routerLink]="['/dashboard/extraction']">
+          <i class="fas fa-cogs"></i> 
+          <span>Extracción</span>
+        </a>
+      </li>
+  
+      <li [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: false }">
+        <a [routerLink]="['/dashboard/movie']">
+          <i class="fas fa-film"></i> 
+          <span>Peliculas</span>
+        </a>
+      </li>
+  
+      <li>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#sesionModal">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Salir</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  
+  <!-- Main Content -->
+  <main>
+    <!-- Contenido del dashboard -->
+    <router-outlet></router-outlet>
+  </main>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="sesionModal" tabindex="-1" aria-labelledby="sesionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="sesionModalLabel">Atención</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Realmente deseas cerrar sesión?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

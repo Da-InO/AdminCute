@@ -1,0 +1,77 @@
+<app-header></app-header>
+<div class="dashboard-container">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul class="nav-links">
+            <li><a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="/busqueda"><i class="fas fa-search"></i> Búsqueda</a></li>
+            <li><a href="/usuarios"><i class="fas fa-users"></i> Usuarios</a></li>
+            <li><a href="/extraccion" class="active"><i class="fas fa-download"></i> Extracción</a></li>
+            <li><a href="/peliculas"><i class="fas fa-film"></i> Películas</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Extraction Form -->
+        <div class="extraction-form">
+            <h6><b>Pantalla de Extracción de Películas</b></h6><br>
+            <div class="form-group">
+                <div class="input-container">
+                    <div class="search-input">
+                        <input id="numSolicitudes" type="text" placeholder="Número de solicitudes">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    <div class="date-range">
+                        <div class="date-input">
+                            <input type="date" id="fechaInicio" placeholder="DD/MM/YYYY" class="datepicker">
+                        </div>
+                        <div class="date-input">
+                            <input type="date" id="fechaFin" placeholder="DD/MM/YYYY" class="datepicker">
+                        </div>
+                    </div>
+                    <button class="borrar-filtros">Borrar Filtros</button>
+                </div>
+            </div>
+            <div class="form-group categories">
+                <button class="category-btn">Drama</button>
+                <button class="category-btn">Comedia</button>
+                <button class="category-btn">Acción</button>
+                <button class="category-btn">Terror</button>
+                <button class="category-btn">Aventura</button>
+                <button class="category-btn">Romance</button>
+                <button class="category-btn">Drama</button>
+                <button class="category-btn">Traición</button>
+            </div>
+
+            <!-- Nueva sección de "Votos mínimos de los usuarios" -->
+            <div *ngIf="showMessage" class="form-group">
+                
+            </div>
+
+            <button class="extract-btn" (click)="startExtraction()">Extraer Película</button>
+            <div *ngIf="isExtracting" class="progress-container">
+                <div class="progress-bar" [style.width]="progress + '%'"></div>
+                <span class="loading-text">Extrayendo...</span>
+            </div>
+
+           <!-- Mensaje que se muestra al finalizar la extracción -->
+<div *ngIf="showMessage" class="completion-message">
+    <p class="completion-title"><b>Se extrajeron con éxito {{ num_peliculas }} películas en {{ num_segundos }} s.</b></p>
+    <div class="peliculas-container">
+        <!-- Repetir la tarjeta de película varias veces usando *ngFor -->
+        <div *ngFor="let pelicula of peliculas" class="pelicula-card">
+            <h4 class="pelicula-title">{{ pelicula.titulo }}</h4>
+            <img [src]="pelicula.imagen" alt="{{ pelicula.titulo }}" class="pelicula-image">
+            <p class="pelicula-description">{{ pelicula.descripcion }}</p>
+            <div class="tags-one">
+                <span *ngFor="let tag of pelicula.tags" class="info-tag">{{ tag }}</span>
+            </div>
+            <div class="categories">
+                <span *ngFor="let categoria of pelicula.categorias" class="category-btn">{{ categoria }}</span>
+            </div>
+        </div>
+    </div>
+</div>

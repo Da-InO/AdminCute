@@ -1,0 +1,46 @@
+<div class="bg-wrapper">
+    <div class="bg-grad-register"></div> <!-- Fondo degradado -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card border-0 shadow rounded-3 my-5">
+            <div class="card-body p-4 p-sm-5">
+              <!-- Imagen de TikTok -->
+              <div class="text-center mb-4">
+                <img src="assets/Tiktoc.png" alt="Logo TikTok" style="max-width: 150px;">
+              </div>
+              <h5 class="card-title text-center mb-5 fw-bold fs-5">Registro</h5>
+              <form (ngSubmit)="onSubmit()">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingName" placeholder="Nombre completo" [(ngModel)]="name" name="name" required #nameInput>
+                  <label for="floatingName">Nombre completo</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="floatingEmail" placeholder="nombre@ejemplo.com" [(ngModel)]="email" name="email" required>
+                  <label for="floatingEmail">Correo electrónico</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña" [(ngModel)]="password" name="password" required>
+                  <label for="floatingPassword">Contraseña</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control" id="floatingRepeatPassword" placeholder="Repetir contraseña" [(ngModel)]="repeatPassword" name="repeatPassword" required>
+                  <label for="floatingRepeatPassword">Repetir contraseña</label>
+                </div>
+                <div class="d-grid">
+                  <button class="btn btn-primary btn-register text-uppercase fw-Ligth" type="submit" [disabled]="!emailRegex.test(email) || !password || password !== repeatPassword">Registrar</button>
+                </div>
+                <div *ngIf="showError" class="alert alert-danger mt-3" role="alert">
+                  {{errorMessage}}
+                </div>
+              </form>
+              <div class="text-center mt-3">
+                ¿Ya tienes una cuenta? <a href="login" class="text-center">Iniciar sesión aquí</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

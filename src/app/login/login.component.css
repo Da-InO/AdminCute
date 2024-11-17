@@ -1,0 +1,32 @@
+.btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+    background-color: #FF4500; 
+}
+
+.btn-google {
+    color: white !important;
+    background-color: #ea4335;
+}
+
+.btn-facebook {
+    color: white !important;
+    background-color: #FF4500;
+}
+
+.bg-grad-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #FF4500 0%, #FF6347 40%, #FF004F 100%);
+    opacity: 1;
+    z-index: -1; /* Asegura que el fondo esté detrás del contenido */
+}
+
+.bg-wrapper {
+    position: relative;
+    height: 100vh; /* Asegura que ocupe todo el alto de la ventana */
+}

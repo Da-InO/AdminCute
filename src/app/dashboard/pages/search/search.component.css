@@ -1,0 +1,404 @@
+.dashboard-container {
+    display: flex;
+    overflow-y: hidden;/* Evita el desplazamiento en el contenedor principal si no es necesario */
+}
+
+.main-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: #ff3366;
+    border-radius: 5px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+    background: #e53050;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    overflow-y: auto; /* Permite el desplazamiento vertical en el contenido principal */
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.logo img {
+    width: 100%;
+    max-width: 150px;
+    margin: 0 auto;
+    display: block;
+}
+
+.nav-links {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 60px;
+}
+
+.nav-links li {
+    padding: 15px 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links li a.active {
+    color: #ff6600;
+    font-weight: bold;
+}
+
+.nav-links li a:hover {
+    color: #ff6600;
+}
+
+.nav-links li a i {
+    color: inherit;
+}
+
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.profile-container {
+    background: linear-gradient(45deg, #ff6600, #ff3366);
+    padding: 10px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.profile img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile span {
+    font-size: 16px;
+    color: white;
+}
+
+/* Extraction Form */
+.extraction-form {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Título dentro de la caja */
+.extraction-form h6 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Search Input */
+.search-input {
+    position: relative;
+    width: 200%; /* Ajusta el ancho del cuadro de búsqueda */
+    display: flex;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+
+.search-input input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    color: #777;
+    padding-left: 10px;
+}
+
+.search-input .search-icon {
+    position: absolute;
+    right: 20px;
+    font-size: 16px;
+    color: #777;
+}
+
+/* Peliculas Container */
+.search-result {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 40%;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.search-result h3 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.search-result img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.search-result p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.info-tag {
+    padding: 5px 10px;
+    font-size: 12px;
+    color: #333;
+    background-color: #ddd;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 5px 3px;
+}
+
+.categories-one {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.category-btn {
+    padding: 4px 10px;
+    font-size: 12px;
+    color: black;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.category-btn:hover {
+    background: linear-gradient(45deg, #ff6600, #ff3366);
+    color: white;
+}
+
+.no-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* O ajusta según el contenedor */
+    text-align: center;
+}
+
+.no-results-image {
+    width: 150px; /* Ajusta el tamaño de la imagen según lo necesites */
+    margin-bottom: 10px;
+}
+
+
+.no-results p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Barra de carga para la extracción */
+/* Barra de carga para la extracción */
+.progress-container {
+    position: relative;
+    margin-top: 20px;
+    height: 15px; /* Mantiene la altura */
+    width: 100%; /* Hacemos que la barra ocupe todo el ancho disponible */
+    max-width: 900px; /* Ajusta el máximo ancho si es necesario */
+    background-color: #ddd;
+    border-radius: 20px; /* Redondea las esquinas */
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6600, #ff3366);
+    transition: width 0.5s ease; /* Asegura una transición suave */
+}
+.loading-text {
+    display: block;
+    text-align: center;
+    color: #ff6600;
+    margin-top: 10px;
+    font-size: 16px; /* Aumentamos el tamaño del texto */
+    font-weight: bold;
+}
+
+
+
+/* Botón 'Extraer Película' con degradado (solo se muestra cuando no hay resultados) */
+/* Botón 'Extraer Película' con degradado */
+.extract-btn {
+    background: linear-gradient(45deg, #ff6600, #ff3366);
+    color: white;
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-align: center;
+    display: inline-block;
+}
+
+.extract-btn:hover {
+    background: linear-gradient(45deg, #ff9944, #e53050);
+}
+
+.extract-btn:focus {
+    outline: none;
+}
+
+/* Botón 'Extraer Película' con degradado (solo se muestra cuando no hay resultados) */
+.extract-btn {
+    background: linear-gradient(45deg, #ff6600, #ff3366);
+    color: white;
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-align: center;
+    display: inline-block;
+    margin-top: 20px; /* Espacio superior para separarlo del texto y la imagen */
+}
+
+.extract-btn:hover {
+    background: linear-gradient(45deg, #ff9944, #e53050);
+}
+
+.extract-btn:focus {
+    outline: none;
+}
+
+/* Centra el botón en la misma área que la imagen */
+.no-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Ajusta el contenedor para que ocupe el 100% del espacio */
+    text-align: center;
+    margin: 0 auto;
+}
+
+.no-results-image {
+    width: 150px; /* Ajusta el tamaño de la imagen según lo necesites */
+    margin-bottom: 10px;
+}
+
+.no-results p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Estilo para el mensaje de error */
+.error-message {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    display: flex; /* Asegura que el bloque se muestre correctamente */
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+  
+  .error-message h2 {
+    color: #ff3366;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .error-message p {
+    color: #777;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .error-message .error-icon {
+    width: 100px;
+    margin-top: 20px;
+    margin: 0 auto;
+  }
+  
+  .no-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* O ajusta según el contenedor */
+    text-align: center;
+    display: block; /* Se asegura de que esté visible mientras no se muestre el error */
+  }
+  
+/* Ocultar la lupa cuando se muestra el mensaje de error */
+.no-results-image {
+    width: 150px;
+    margin-bottom: 10px;
+    margin: 0 auto;
+}
+  
+  .no-results p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  

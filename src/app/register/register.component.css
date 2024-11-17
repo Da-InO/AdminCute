@@ -1,0 +1,41 @@
+.bg-grad-register {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(60deg, #FF4500 0%, #FF004F 100%);
+    opacity: 1;
+    z-index: -1; /* Asegura que el fondo esté detrás del contenido */
+}
+
+.btn-register {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+    background-color: #FF4500;  /* Color de fondo del botón */
+    color: white;  /* Color del texto del botón */
+    border: none;  /* Elimina el borde predeterminado */
+    border-radius: 5px;  /* Bordes redondeados para el botón (opcional) */
+}
+
+.btn-register:disabled {
+    background-color: #ff7f5a;  /* Color de fondo cuando el botón está deshabilitado */
+    cursor: not-allowed;  /* Cambia el cursor cuando el botón está deshabilitado */
+}
+
+/* Poner todo en negrita, excepto los elementos especificados */
+h5.card-title, .form-floating label, .form-check-label, .alert {
+    font-weight: bold;  /* Negrita */
+    color: black;  /* Color negro */
+}
+
+/* Excepción para el enlace "Iniciar sesión aquí" */
+.text-center a {
+    font-weight: normal;  /* No negrita */
+    color: #007bff; /* Color azul para el enlace */
+}
+
+.text-center a:hover {
+    text-decoration: underline; /* Subrayar al pasar el mouse */
+}

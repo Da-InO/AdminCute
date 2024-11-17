@@ -1,0 +1,59 @@
+<app-header></app-header> 
+<div class="container">
+    <div *ngIf="showList" class="content">
+        <h2>Películas Guardadas</h2>
+        <div class="movie-list">
+            <div class="movie-card" *ngFor="let movie of movies" (click)="viewDetails(movie)">
+                <img src="assets/coraline.jpg" alt="Coraline">
+                <h3>Coraline</h3>
+                <p>Coraline es una niña aburrida y triste en su nuevo hogar, con extraños vecinos arriba...</p>
+                <div class="info">
+                    <span>1 h 40 min</span>
+                    <span>2009</span>
+                    <span>13+</span>
+                </div>
+                <div class="tags">
+                    <span class="tag">Drama</span>
+                    <span class="tag">Drama</span>
+                    <span class="tag">Drama</span>
+                    <span class="tag">Drama</span>
+                </div>
+                <div class="actions">
+                    <button class="btn">❤️ Like</button>
+                    <button class="btn">❌ Quitar</button>
+                </div>
+            </div>
+        </div>
+        <div class="pagination">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+        </div>
+    </div>
+
+    <div *ngIf="!showList" class="details">
+        <h2>Detalles de: {{ selectedMovie?.title }}</h2>
+        <div class="movie-card">
+            <img src="assets/coraline.jpg" alt="Coraline">
+            <p>Coraline es una niña aburrida y triste en su nuevo hogar, con extraños vecinos arriba...</p>
+            <div class="info">
+                <span>1 h 40 min</span>
+                <span>2009</span>
+                <span>13+</span>
+            </div>
+            <div class="tags">
+                <span class="tag">Drama</span>
+                <span class="tag">Drama</span>
+                <span class="tag">Drama</span>
+                <span class="tag">Drama</span>
+            </div>
+            <div class="actions">
+                <span>Likes recibidos: {{ num }} ❤️</span>
+                <span>Encuestas hechas: {{ num }} 📋</span>
+            </div>
+        </div>
+        <button (click)="goBack()">Volver</button>
+    </div>
+</div>

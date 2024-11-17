@@ -1,0 +1,74 @@
+<app-header></app-header>
+<div class="dashboard-container">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul class="nav-links">
+            <li><a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="/busqueda" class="active"><i class="fas fa-search"></i> Búsqueda</a></li>
+            <li><a href="/usuarios"><i class="fas fa-users"></i> Usuarios</a></li>
+            <li><a href="/extraccion"><i class="fas fa-download"></i> Extracción</a></li>
+            <li><a href="/peliculas"><i class="fas fa-film"></i> Películas</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="extraction-form">
+            <h6><b>Pantalla de Solicitud de Videos</b></h6><br />
+            <div class="form-group">
+                <div class="input-container">
+                    <div class="search-input">
+                        <input id="searchMovie" type="text" placeholder="Buscar película..." [(ngModel)]="searchQuery"
+                            (keypress)="simulateSearch()" />
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barra de carga para la búsqueda -->
+            <div class="progress-container" *ngIf="isSearching">
+                <div class="progress-bar" [style.width]="progress + '%'"></div>
+                <span class="loading-text">Buscando...</span>
+            </div>
+
+            <!-- Este bloque se muestra cuando no hay resultados -->
+            <div class="no-result" *ngIf="noResults && !showError">
+                <img src="assets/lupaerror.png" alt="No se encontraron resultados" class="no-results-image" />
+                <p>No se encontraron resultados para la búsqueda.</p>
+
+                <!-- Botón 'Extraer Película' solo cuando no hay resultados -->
+                <button (click)="startExtraction()" class="extract-btn">Extraer Película</button>
+            </div>
+
+            <!-- Mensaje de error con diseño similar a la segunda imagen -->
+            <div *ngIf="showError" class="error-message">
+                <h2>ERROR 404</h2>
+                <p>No se pudo extraer la película: {{ movieName }}</p>
+                <img src="assets/error-icon.png" alt="Error" class="error-icon">
+            </div>
+
+            <!-- Barra de carga para la extracción -->
+            <div class="progress-container" *ngIf="isExtracting">
+                <div class="progress-bar" [style.width]="progress + '%'"></div>
+                <span class="loading-text">Extrayendo...</span>
+            </div>
+
+            <!-- Resultados de la Búsqueda -->
+            <div class="search-result" *ngIf="searchCompleted && !noResults && !showError">
+                <div class="movie-info" *ngFor="let pelicula of filteredPeliculas">
+                    <h3>{{ pelicula.titulo }}</h3>
+                    <img [src]="pelicula.imagen" alt="{{ pelicula.titulo }}" />
+                    <p>{{ pelicula.descripcion }}</p>
+                    <div class="tags">
+                        <span class="info-tag" *ngFor="let tag of pelicula.tags">{{ tag }}</span>
+                    </div>
+                    <div class="categories-one">
+                        <span class="category-btn" *ngFor="let categoria of pelicula.categorias">{{ categoria }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

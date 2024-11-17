@@ -1,0 +1,321 @@
+/* Cabecera general */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: white; /* Fondo blanco sin tonos grises */
+    border-radius: 8px;
+  }
+  
+  /* Contenedor de búsqueda */
+  .search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-input-container {
+    position: relative;
+    width: 80%;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 8px 40px 8px 8px; /* Espaciado para el icono a la derecha */
+    font-size: 16px;
+    border-radius: 20px;
+    border: 1px solid #ddd; /* Borde claro */
+    background-color: #fff; /* Fondo blanco */
+    color: #333; /* Color del texto */
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888; /* Color del ícono */
+    font-size: 20px;
+    pointer-events: none; /* Evita que el ícono bloquee la entrada del texto */
+  }
+  
+  /* Botón de perfil */
+  .profile-btn {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #FF4500, #FF004F);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .profile-btn .profile-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .profile-btn .username {
+    font-size: 16px;
+  }
+  
+  /* Contenedor para las cardviews */
+  .card-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0 15px;
+    background-color: white; /* Fondo blanco del contenedor */
+  }
+  
+  /* Estilo para cada card */
+  .card {
+    background-color: white; /* Fondo blanco sin tonos grises */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 45%; /* Ajusta el tamaño de la tarjeta */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+  }
+  
+  
+  
+  
+  
+  
+  /* Global Styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .card-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  /* Card Styles */
+  .card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: bold;
+  }
+  
+  .card-header i {
+    font-size: 1.5rem;
+    background: linear-gradient(to right, #FF4500, #FF004F);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .card-body {
+    flex: 1;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .card-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Specific Styles for Categories and Total Users */
+  .card-large {
+    flex: 1;
+    min-height: 300px;
+  }
+  
+  .card-small {
+    flex: 1;
+    background-color: #FF004F;
+    color: #ffffff;
+    min-height: 150px;
+  }
+  
+  .card-small .card-header {
+    background-color: #FF004F;
+    color: #ffffff;
+  }
+  
+  .card-small .card-value {
+    color: #ffffff;
+  }
+  
+  /* Specific Styles for the icon in the Total de Usuarios card */
+  .card-small .card-header .icon-white {
+    color: #ffffff;  /* Cambia el color del icono a blanco */
+    background: none;  /* Remueve cualquier fondo o gradiente */
+    -webkit-background-clip: unset;  /* Asegura que no haya clipping de fondo */
+    -webkit-text-fill-color: #ffffff;  /* Asegura que el icono sea blanco */
+  }
+  
+  /* Specific Styles for the Usuarios Online card */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .status-online, .status-offline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .line {
+    display: inline-block;
+    width: 50px;
+    height: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+  
+  .user-count {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+  }
+  
+  /* Asegúrate de que todos los card-containers tengan el mismo estilo */
+  .card-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: flex-start; /* Alinea al inicio para mantener consistencia en la altura */
+    margin-bottom: 20px; /* Espaciado entre los contenedores */
+  }
+  
+  /* Si quieres que las tarjetas tengan el mismo tamaño */
+  .card {
+    flex: 1;
+    min-width: 250px; /* Ancho mínimo para asegurar que las tarjetas se alineen correctamente */
+  }
+  
+  
+  
+  
+  /* Gran CardView Container */
+  .cardview-container {
+    width: 100%;
+    height: 70vh;
+    overflow-y: auto;  /* Agrega la barra de desplazamiento */
+    padding: 20px;
+    background-color: white; /* Fondo blanco para la card view */
+    border-radius: 8px; /* Sin bordes visibles */
+  }
+  
+  /* Barra de desplazamiento degradada */
+  .cardview-container::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  .cardview-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right, #FF4500, #FF004F); /* Barra de desplazamiento con gradiente */
+    border-radius: 4px; /* Bordes redondeados para la barra de desplazamiento */
+  }
+  
+  .cardview-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Fondo del track de la barra de desplazamiento */
+    border-radius: 4px; /* Bordes redondeados para el track */
+  }
+
+
+
+
+  .bar-chart-container {
+    margin-top: 20px;
+    width: 100%; /* Asegura que el gráfico ocupe el ancho disponible */
+    height: 200px; /* Ajusta la altura para hacerlo más delgado */
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center; /* Centra el gráfico */
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%; /* Se asegura que la información también ocupe el ancho total */
+  }
+  
+  .user-stats {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .status-online, .status-offline {
+    display: flex;
+    align-items: center;
+    flex-direction: column; /* Los textos estarán debajo de las barras */
+    justify-content: center;
+  }
+  
+  .line {
+    width: 60px;  /* Longitud de la línea */
+    height: 6px;   /* Grosor de la línea */
+    margin-bottom: 8px;  /* Espacio entre la línea y el texto */
+  }
+  
+  .online {
+    background-color: #FF004F;  /* Color de la línea para 'Online' */
+  }
+  
+  .offline {
+    background-color: #FFDFB6;  /* Color de la línea para 'Offline' */
+  }
+  
+  .total-users {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .total-number {
+    font-size: 36px;  /* Tamaño grande para el número total */
+    font-weight: bold;
+    color: #333;  /* Un color para que destaque */
+  }
+  

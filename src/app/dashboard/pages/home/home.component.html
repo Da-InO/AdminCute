@@ -1,0 +1,124 @@
+<div class="header">
+    <div class="search-container">
+      <div class="search-input-container">
+        <input type="text" placeholder="Buscar..." class="search-input" />
+        <i class="search-icon fas fa-search"></i>
+      </div>
+    </div>
+    <button class="profile-btn">
+      <img [src]="getProfileImage()" alt="Perfil" class="profile-img" />
+      <span class="username">{{ '@' + getUsername() }}</span>
+    </button>
+  </div>
+  
+  <!-- Gran CardView Contenedor -->
+  <div class="cardview-container">
+  
+    <!-- Cardviews -->
+    <div class="card-container">
+      <!-- Card 1: Total de videos almacenados -->
+      <div class="card">
+        <div class="card-header">
+          <span>Total de videos almacenados</span>
+          <i class="fas fa-video"></i> <!-- Icono de videos -->
+        </div>
+        <div class="card-body">
+          <span class="card-value">12.344</span>
+        </div>
+      </div>
+      
+      <!-- Card 2: Número de búsquedas realizadas -->
+      <div class="card">
+        <div class="card-header">
+          <span>Número de búsquedas realizadas</span>
+          <i class="fas fa-search"></i> <!-- Icono de búsqueda -->
+        </div>
+        <div class="card-body">
+          <span class="card-value">12.345</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cardviews -->
+    <div class="card-container">
+      <!-- Card 1: Categorías más populares -->
+      <div class="card card-large">
+        <div class="card-header">
+          <span>3 Categorías más populares</span>
+          <i class="fas fa-th-list"></i> <!-- Icono de categorías -->
+        </div>
+        <div class="card-body">
+          <!-- Gráfico circular -->
+          <div class="chart-container">
+            <div class="circle-chart">
+              <apx-chart 
+                #chart
+                [series]="chartOptions.series" 
+                [chart]="chartOptions.chart" 
+                [labels]="chartOptions.labels" 
+                [responsive]="chartOptions.responsive"
+                [colors]="chartOptions.colors"> <!-- Colores aplicados aquí -->
+              </apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Card 2: Total de Usuarios -->
+      <div class="card card-small">
+        <div class="card-header">
+          <span>Total de Usuarios</span>
+          <i class="fas fa-users icon-white"></i> <!-- Icono de usuarios -->
+        </div>
+        <div class="card-body">
+          <span class="card-value">12,234</span>
+        </div>
+      </div>
+    </div>
+          <div class="card-container">
+            <!-- Card 3: Usuarios Online (Nuevo gráfico de barras) -->
+            <div class="card">
+              <div class="card-header">
+                <span>Usuarios Online</span>
+                <i class="fas fa-circle-exclamation icon-gradient"></i> <!-- Icono con clase específica -->
+              </div>
+              <div class="card-body">
+                <!-- Información de usuarios -->
+                <div class="user-info">
+                  
+                  <div class="total-users">
+                    <span><strong>Total:</strong> <span class="total-number">594</span> usuarios</span>
+                  </div>
+                </div>
+          
+                <!-- Gráfico de barras para online y offline -->
+                <div class="bar-chart-container">
+                  <apx-chart
+                    #barChart
+                    [series]="barChartOptions.series"
+                    [chart]="barChartOptions.chart"
+                    [xaxis]="barChartOptions.xaxis"
+                    [tooltip]="barChartOptions.tooltip"
+                    [fill]="barChartOptions.fill"
+                    [stroke]="barChartOptions.stroke"
+                    [plotOptions]="barChartOptions.plotOptions"
+                    [legend]="barChartOptions.legend">
+                  </apx-chart>
+                </div>
+                <div class="user-stats">
+                    <!-- Los elementos "Online" y "Offline" estarán debajo de las barras correspondientes -->
+                    <div class="status-online">
+                      <span class="line online"></span> <!-- Línea para 'Online' -->
+                      <span>Online</span>
+                      <span class="user-count">179 usuarios</span>
+                    </div>
+                    <div class="status-offline">
+                      <span class="line offline"></span> <!-- Línea para 'Offline' -->
+                      <span>Offline</span>
+                      <span class="user-count">394 usuarios</span>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          
