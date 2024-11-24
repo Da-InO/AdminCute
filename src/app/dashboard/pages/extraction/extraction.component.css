@@ -1,13 +1,19 @@
-.dashboard-container {
-    display: flex;
-    height: 100vh;   
-}
-
-/* Sidebar */
+/* Contenedor Principal */
 .sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto; /* Permitir desplazamiento */
     width: 250px;
     background-color: #ffffff;
     padding-top: 20px;
+    position: fixed;
+    top: 80px;
+    bottom: 0;
+    left: 0;
+    height: calc(100vh - 80px);
 }
 
 .logo img {
@@ -15,6 +21,8 @@
     max-width: 150px;
     margin: 0 auto;
     display: block;
+    width: 100px; /* Ajusta el tamaño según prefieras */
+
 }
 
 .nav-links {
@@ -36,11 +44,11 @@
     gap: 10px; /* Espacio entre el icono y el texto */
 }
 
-.nav-links li a:hover {
+.main-con-links li a:hover {
     color: #ff6600; /* Cambia solo el color del texto e ícono */
 }
 
-.nav-links li a i {
+.main-content-links li a i {
     color: inherit; /* Asegura que el icono cambie de color junto con el texto */
 }
 
@@ -82,16 +90,11 @@
     border-bottom: 1px solid #ddd;
 }
 
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
 
 .profile {
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 .profile img {
@@ -105,6 +108,7 @@
     font-size: 16px;
     color:#333;
 }
+
 
 /* Extraction Form */
 .extraction-form {
@@ -229,15 +233,17 @@
     width: 200px;
     height: 10px;
     border-radius: 10px;
-    background: #ddd;
     outline: none;
     margin: 0 auto;
+    background: linear-gradient(to right, #ff6600 0%, #ff6600 var(--value, 50%), #ddd var(--value, 50%), #ddd 100%);
+    transition: background 0.3s ease;
 }
 
 .form-group input[type="range"]::-webkit-slider-runnable-track {
     height: 10px;
-    background: #ff6600;
     border-radius: 10px;
+    width: 100%;
+    background: linear-gradient(to right, #ff6600 var(--value, 50%), #ddd 0%);
 }
 
 .form-group input[type="range"]::-webkit-slider-thumb {
@@ -250,6 +256,24 @@
     cursor: pointer;
 }
 
+/* Para navegadores que soportan ::-moz-range-track */
+.form-group input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 10px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #ff6600 var(--value, 50%), #ddd 0%);
+}
+
+.form-group input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #333;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+}
+
+/* CSS para aplicar el color dinámico */
 .form-group input[type="range"]:focus {
     outline: none;
 }
@@ -330,74 +354,9 @@
     align-items: center;
     justify-content: center;
     color: white;
-}
-
-.profile {
-    display: flex;
-    align-items: center;
+    background: linear-gradient(45deg, #ff6600, #ff3366);
+    border-radius: 20px;
     gap: 10px;
-}
-
-.profile img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-}
-
-.profile span {
-    font-size: 16px;
-    color: white;
-}
-
-
-.form-group input[type="range"] {
-    -webkit-appearance: none;
-    width: 200px; /* Ajuste a tamaño pequeño */
-    height: 8px; /* Mantiene la altura pequeña */
-    background: linear-gradient(to right, #ff6600 0%, #ff6600 var(--value, 50%), #ddd var(--value, 50%), #ddd 100%);
-    border-radius: 10px;
-    outline: none;
-    transition: background 0.3s ease;
-}
-
-
-.form-group input[type="range"]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 10px;
-    border-radius: 10px;
-    background: linear-gradient(to right, #ff6600 var(--value, 50%), #ddd 0%);
-}
-
-.form-group input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 16px; /* Tamaño del punto negro */
-    height: 16px;
-    background: #333;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-/* Para navegadores que soportan ::-moz-range-track */
-.form-group input[type="range"]::-moz-range-track {
-    width: 100%;
-    height: 10px;
-    border-radius: 10px;
-    background: linear-gradient(to right, #ff6600 var(--value, 50%), #ddd 0%);
-}
-
-.form-group input[type="range"]::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background: #333;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-}
-
-/* CSS para aplicar el color dinámico */
-.form-group input[type="range"]:focus {
-    outline: none;
 }
 
 /* Botón deshabilitado */
@@ -444,98 +403,8 @@
     width: 100%;
     border-bottom: 1px solid #ddd;
     height: 80px;
+    box-shadow: none;
 }
-
-.logo img {
-    width: 100px; /* Ajusta el tamaño según prefieras */
-}
-
-.profile-container {
-    display: flex;
-    align-items: center;
-    background: linear-gradient(45deg, #ff6600, #ff3366);
-    padding: 10px 15px;
-    border-radius: 20px;
-    color: white;
-    gap: 10px;
-}
-
-.profile img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-}
-
-.profile span {
-    font-size: 16px;
-    color: white;
-}
-
-/* Contenedor Principal */
-.dashboard-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding: 0;
-    margin: 0;
-    overflow-y: auto; /* Permitir desplazamiento */
-}
-
-
-/* Contenedor Superior */
-.top-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #ffffff; /* Fondo blanco */
-    width: 100%;
-    border-bottom: 1px solid #ddd; /* Borde sutil */
-    height: 80px;
-    box-shadow: none; /* Elimina cualquier sombra */
-}
-
-/* Sidebar */
-.sidebar {
-    width: 250px;
-    background-color: #ffffff; /* Cambiado a blanco */
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 80px;
-    bottom: 0;
-    left: 0;
-    height: calc(100vh - 80px);
-    overflow-y: auto;
-}
-
-
-.logo img {
-    width: 100px; /* Ajusta el tamaño según prefieras */
-}
-
-.profile-container {
-    display: flex;
-    align-items: center;
-    background: linear-gradient(45deg, #ff6600, #ff3366);
-    padding: 10px 15px;
-    border-radius: 20px;
-    color: white;
-    gap: 10px;
-}
-
-.profile img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-}
-
-.profile span {
-    font-size: 16px;
-    color: white;
-}
-
 
 /* Clase para el elemento activo en la barra lateral */
 .nav-links li a.active {
@@ -710,21 +579,13 @@
     transition: background 0.3s ease, transform 0.2s ease;
     margin-top: 10px;
 }
-
 .ok-btn:hover {
     background: linear-gradient(45deg, #4caf50, #81c784);
     transform: scale(1.05);
 }
-
 .ok-btn:active {
     transform: scale(0.95);
 }
-
-.completion-message {
-    text-align: center;
-    margin-top: 20px;
-}
-
 .completion-title {
     font-size: 16px;
     color: #333;
@@ -735,7 +596,6 @@
     justify-content: center;
     margin-top: 20px;
   }
-  
   .pagination button {
     background-color: #f1f1f1;
     border: none;
@@ -745,14 +605,11 @@
     cursor: pointer;
     font-size: 14px;
   }
-  
   .pagination button.active {
     background-color: #007bff;
     color: #fff;
     font-weight: bold;
   }
-  
   .pagination button:hover {
     background-color: #ddd;
   }
-  
