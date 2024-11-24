@@ -19,6 +19,9 @@ const routes: Routes = [
   // Rutas del login y registro
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'movies', component: MovieComponent },
+  { path: 'extraccion', component: ExtractionComponent },
+  { path: '', redirectTo: '/extraccion', pathMatch: 'full' },
 
   // Ruta protegida para el dashboard (requiere autenticación)
   { 

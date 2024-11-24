@@ -6,71 +6,120 @@
     <div class="sidebar">
         <ul class="nav-links">
             <li><a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-            <li><a href="/busqueda"><i class="fas fa-search"></i> Búsqueda</a></li>
+            <li><a href="/busqueda" class="active"><i class="fas fa-search"></i> Búsqueda</a></li>
             <li><a href="/usuarios"><i class="fas fa-users"></i> Usuarios</a></li>
-            <li><a href="/extraccion" class="active"><i class="fas fa-download"></i> Extracción</a></li>
+            <li><a href="/extraccion"><i class="fas fa-download"></i> Extracción</a></li>
             <li><a href="/peliculas"><i class="fas fa-film"></i> Películas</a></li>
         </ul>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Extraction Form -->
         <div class="extraction-form">
-            <h6><b>Pantalla de Extracción de Películas</b></h6><br>
+            <!-- Contenedor del título y el carrito -->
+            <div class="header-with-cart">
+                <h6><b>Pantalla de Solicitud de Videos</b></h6>
+                <div class="cart-container" (click)="toggleCartVisibility()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">{{ cart.length }}</span>
+                </div>
+            </div>
+
+            <!-- Contenedor del carrito desplegable -->
+            <div class="cart-dropdown" *ngIf="isCartVisible">
+                <h4>Películas en el Carrito</h4>
+                <div *ngIf="cart.length > 0; else emptyCart">
+                    <div *ngFor="let movie of cart" class="cart-item">
+                        <span>{{ movie.titulo }}</span>
+                        <button (click)="removeMovie(movie)">Eliminar</button>
+                    </div>
+
+                    <!-- Botón Extraer dentro del carrito -->
+                    <button class="extract-btn" (click)="startExtraction()">Extraer Película</button>
+
+                    <!-- Barra de carga dentro del carrito -->
+                    <div class="progress-container" *ngIf="isExtracting">
+                        <div class="progress-bar" [style.width]="progress + '%'"></div>
+                        <span class="loading-text">Extrayendo...</span>
+                    </div>
+
+                    <!-- Mensaje al completar la extracción -->
+                    <div *ngIf="showMessage" class="completion-message">
+                        <p class="completion-title"><b>Se extrajeron con éxito {{ num_peliculas }} películas en {{ num_segundos }} s.</b></p>
+                        <button class="ok-btn" (click)="closeMessage()">OK</button>
+                    </div>
+                </div>
+                <ng-template #emptyCart>
+                    <!-- Muestra el mensaje en el carrito vacío -->
+                    <div *ngIf="showMessage">
+                        <p class="completion-title"><b>Se extrajeron con éxito {{ num_peliculas }} películas en {{ num_segundos }} s.</b></p>
+                        <button class="ok-btn" (click)="closeMessage()">OK</button>
+                    </div>
+                    <div *ngIf="!showMessage">
+                        <p>El carrito está vacío.</p>
+                    </div>
+                </ng-template>
+            </div>
+
+            <br />
             <div class="form-group">
                 <div class="input-container">
                     <div class="search-input">
-                        <input id="numSolicitudes" type="text" placeholder="Número de solicitudes">
+                        <input id="searchMovie" type="text" placeholder="Buscar película..." [(ngModel)]="searchQuery"
+                            (keypress)="simulateSearch($event)" />
                         <i class="fas fa-search search-icon"></i>
                     </div>
                     <div class="date-range">
                         <div class="date-input">
-                            <input type="date" id="fechaInicio" placeholder="DD/MM/YYYY" class="datepicker">
+                            <input type="date" id="fechaInicio" placeholder="DD/MM/YYYY" class="datepicker" [(ngModel)]="startDate"
+                                (change)="handleDateChange()">
                         </div>
                         <div class="date-input">
-                            <input type="date" id="fechaFin" placeholder="DD/MM/YYYY" class="datepicker">
+                            <input type="date" id="fechaFin" placeholder="DD/MM/YYYY" class="datepicker" [(ngModel)]="endDate"
+                                (change)="handleDateChange()">
                         </div>
                     </div>
-                    <button class="borrar-filtros">Borrar Filtros</button>
+                    <button class="borrar-filtros" (click)="clearFilters()">Borrar Filtros</button>
                 </div>
             </div>
+
+            <!-- Botones de Categorías -->
             <div class="form-group categories">
-                <button class="category-btn">Drama</button>
-                <button class="category-btn">Comedia</button>
-                <button class="category-btn">Acción</button>
-                <button class="category-btn">Terror</button>
-                <button class="category-btn">Aventura</button>
-                <button class="category-btn">Romance</button>
-                <button class="category-btn">Drama</button>
-                <button class="category-btn">Traición</button>
+                <button 
+                    class="category-btn" 
+                    *ngFor="let category of categories"
+                    [class.active]="selectedCategories.includes(category)"
+                    (click)="toggleCategory(category)">
+                    {{ category }}
+                </button>
             </div>
 
-            <!-- Nueva sección de "Votos mínimos de los usuarios" -->
-            <div *ngIf="showMessage" class="form-group">
-                
+            <!-- Resultados de la Búsqueda -->
+            <div class="peliculas-container">
+                <div *ngFor="let pelicula of displayedPeliculas" class="pelicula-card">
+                    <h4 class="pelicula-title">{{ pelicula.titulo }}</h4>
+                    <img [src]="pelicula.imagen" alt="{{ pelicula.titulo }}" class="pelicula-image">
+                    <p class="pelicula-description">{{ pelicula.descripcion }}</p>
+                    <div class="tags-one">
+                        <span *ngFor="let tag of pelicula.tags" class="info-tag">{{ tag }}</span>
+                    </div>
+                    <div class="categories">
+                        <span *ngFor="let categoria of pelicula.categorias" class="category-btn">{{ categoria }}</span>
+                    </div>
+                    <!-- Botón de añadir -->
+                    <button class="add-btn" (click)="addMovie(pelicula)">Añadir</button>
+                </div>
             </div>
 
-            <button class="extract-btn" (click)="startExtraction()">Extraer Película</button>
-            <div *ngIf="isExtracting" class="progress-container">
-                <div class="progress-bar" [style.width]="progress + '%'"></div>
-                <span class="loading-text">Extrayendo...</span>
-            </div>
-
-           <!-- Mensaje que se muestra al finalizar la extracción -->
-<div *ngIf="showMessage" class="completion-message">
-    <p class="completion-title"><b>Se extrajeron con éxito {{ num_peliculas }} películas en {{ num_segundos }} s.</b></p>
-    <div class="peliculas-container">
-        <!-- Repetir la tarjeta de película varias veces usando *ngFor -->
-        <div *ngFor="let pelicula of peliculas" class="pelicula-card">
-            <h4 class="pelicula-title">{{ pelicula.titulo }}</h4>
-            <img [src]="pelicula.imagen" alt="{{ pelicula.titulo }}" class="pelicula-image">
-            <p class="pelicula-description">{{ pelicula.descripcion }}</p>
-            <div class="tags-one">
-                <span *ngFor="let tag of pelicula.tags" class="info-tag">{{ tag }}</span>
-            </div>
-            <div class="categories">
-                <span *ngFor="let categoria of pelicula.categorias" class="category-btn">{{ categoria }}</span>
+            <!-- Navegación de Paginación -->
+            <div class="pagination">
+                <button 
+                    *ngFor="let page of [].constructor(totalPages); let i = index"
+                    class="page-btn"
+                    [class.active]="currentPage === (i + 1)"
+                    (click)="changePage(i + 1)">
+                    {{ i + 1 }}
+                </button>
             </div>
         </div>
     </div>

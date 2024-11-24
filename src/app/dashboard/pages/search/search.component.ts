@@ -1,33 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SearchService } from 'src/app/services/search.service';
+
+interface ExtractionResult {
+  success: boolean;
+  message?: string;
+}
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })
-export class SearchComponent {
-  peliculas = [
-    {
-      titulo: 'Coraline',
-      imagen: 'assets/coraline.jpg',
-      descripcion: 'Coraline es una niña aburrida y triste en su nuevo hogar, con extraños vecinos arriba...',
-      tags: ['1 h 40 min', '2009', '13+'],
-      categorias: ['Drama', 'Fantasía', 'Animación'],
-    },
-  ];
-
+export class SearchComponent implements OnInit {
+  peliculas: any[] = [];
   searchQuery: string = '';
   isSearching: boolean = false;
   isExtracting: boolean = false;
   progress: number = 0;
-  searchCompleted: boolean = false;
+  searchCompleted: boolean = false; 
   noResults: boolean = false;
   showError: boolean = false;
-  movieName: string = ''; // Variable para el nombre de la película
+  movieName: string = '';
 
-  constructor() {}
+  constructor(private searchService: SearchService) {}
 
-  // Método para filtrar películas por título usando el valor de `searchQuery`
+  ngOnInit(): void {
+    this.loadMovies();
+  }
+
+  // Carga las películas desde el servicio
+  loadMovies(): void {
+    this.searchService.getMovies().subscribe((data: any) => {
+      this.peliculas = data;
+    });
+  }
+
+  // Método para filtrar películas por título usando el valor de searchQuery
   get filteredPeliculas() {
     return this.peliculas.filter((pelicula) =>
       pelicula.titulo.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -41,7 +49,7 @@ export class SearchComponent {
     this.isSearching = true;
     this.searchCompleted = false;
     this.noResults = false;
-    this.showError = false;  // Asegura que no se muestre el error 404
+    this.showError = false;
     this.progress = 0;
 
     const interval = setInterval(() => {
@@ -62,16 +70,18 @@ export class SearchComponent {
   startExtraction() {
     this.isExtracting = true;
     this.progress = 0;
-    this.showError = false; // Resetear el error antes de empezar la extracción
+    this.showError = false;
 
     const interval = setInterval(() => {
       if (this.progress >= 100) {
         clearInterval(interval);
         this.isExtracting = false;
-        
-        // Mostrar el mensaje de error al finalizar la extracción
-        this.showError = true;
-        this.movieName = 'Nombre de Película'; // Aquí puedes poner el nombre de la película real
+
+        // Simula la extracción de la película
+        this.searchService.extractMovie(this.searchQuery).subscribe((result: ExtractionResult) => {
+          this.showError = !result.success;
+          this.movieName = this.searchQuery;
+        });
       } else {
         this.progress += 10;
       }

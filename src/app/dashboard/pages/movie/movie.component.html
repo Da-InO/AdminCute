@@ -1,25 +1,23 @@
-<app-header></app-header> 
+<app-header></app-header>
 <div class="container">
     <div *ngIf="showList" class="content">
         <h2>Películas Guardadas</h2>
         <div class="movie-list">
             <div class="movie-card" *ngFor="let movie of movies" (click)="viewDetails(movie)">
-                <img src="assets/coraline.jpg" alt="Coraline">
-                <h3>Coraline</h3>
-                <p>Coraline es una niña aburrida y triste en su nuevo hogar, con extraños vecinos arriba...</p>
+                <h3>{{ movie.title }}</h3>
+                <img [src]="movie.poster_path" [alt]="movie.title">
+                <p class="tagline">"{{ movie.tagline }}"</p>
+                <p>{{ movie.overview }}</p>
                 <div class="info">
-                    <span>1 h 40 min</span>
-                    <span>2009</span>
-                    <span>13+</span>
+                    <span>{{ movie.runtime }} min</span>
+                    <span>{{ movie.release_date | date:'longDate' }}</span>
+                    <span>{{ movie.vote_average }} 🌟</span>
                 </div>
                 <div class="tags">
-                    <span class="tag">Drama</span>
-                    <span class="tag">Drama</span>
-                    <span class="tag">Drama</span>
-                    <span class="tag">Drama</span>
+                    <span class="tag" *ngFor="let tag of movie.tags">{{ tag }}</span>
                 </div>
                 <div class="actions">
-                    <button class="btn">❤️ Like</button>
+                    <button class="btn">❤ Like</button>
                     <button class="btn">❌ Quitar</button>
                 </div>
             </div>
@@ -35,25 +33,45 @@
 
     <div *ngIf="!showList" class="details">
         <h2>Detalles de: {{ selectedMovie?.title }}</h2>
+        <p class="tagline">"{{ selectedMovie?.tagline }}"</p>
         <div class="movie-card">
-            <img src="assets/coraline.jpg" alt="Coraline">
-            <p>Coraline es una niña aburrida y triste en su nuevo hogar, con extraños vecinos arriba...</p>
+            <img [src]="selectedMovie?.poster_path" [alt]="selectedMovie?.title">
+            <p>{{ selectedMovie?.overview }}</p>
             <div class="info">
-                <span>1 h 40 min</span>
-                <span>2009</span>
-                <span>13+</span>
+                <span>Duración: {{ selectedMovie?.runtime }} min</span>
+                <span>Fecha de estreno: {{ selectedMovie?.release_date | date:'longDate' }}</span>
+                <span>🌟 {{ selectedMovie?.vote_average }} ({{ selectedMovie?.vote_count }} votos)</span>
             </div>
             <div class="tags">
-                <span class="tag">Drama</span>
-                <span class="tag">Drama</span>
-                <span class="tag">Drama</span>
-                <span class="tag">Drama</span>
+                <span class="tag" *ngFor="let tag of selectedMovie?.tags">{{ tag }}</span>
             </div>
             <div class="actions">
-                <span>Likes recibidos: {{ num }} ❤️</span>
+                <span>Likes recibidos: {{ num }} ❤</span>
                 <span>Encuestas hechas: {{ num }} 📋</span>
             </div>
+
+            <!-- Campos adicionales añadidos para la vista de detalles -->
+            <div class="additional-info">
+                <div class="info-row">
+                    <p><strong>Presupuesto:</strong> ${{ selectedMovie?.budget | number:'1.0-0' }}</p>
+                    <p><strong>Ingresos:</strong> ${{ selectedMovie?.revenue | number:'1.0-0' }}</p>
+                </div>
+                <div class="info-row">
+                    <p><strong>Estado:</strong> {{ selectedMovie?.status }}</p>
+                    <p><strong>Idioma original:</strong> {{ selectedMovie?.original_language | uppercase }}</p>
+                </div>
+                <div class="info-row">
+                    <p><strong>Popularidad:</strong> {{ selectedMovie?.popularity }}</p>
+                    <p><strong>ID de IMDb:</strong> <a [href]="'https://www.imdb.com/title/' + selectedMovie?.imdb_id"
+                            target="_blank">{{ selectedMovie?.imdb_id }}</a></p>
+                </div>
+            </div>
+
+            <a *ngIf="selectedMovie?.homepage" [href]="selectedMovie?.homepage" target="_blank" class="btn">
+                Ver página oficial
+            </a>
         </div>
         <button (click)="goBack()">Volver</button>
+           
     </div>
 </div>

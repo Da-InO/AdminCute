@@ -611,3 +611,148 @@
     margin: 5px 3px; /* Espacio entre las etiquetas */
 }
 
+.add-btn {
+    background: linear-gradient(45deg, #34a853, #28a745); /* Verde degradado */
+    color: white;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.add-btn:hover {
+    background: linear-gradient(45deg, #43b963, #34a853); /* Color más brillante */
+}
+
+
+.header-with-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    color: #ff6600;
+    cursor: pointer;
+}
+
+.cart-container i {
+    font-size: 24px;
+}
+
+.cart-count {
+    background-color: #ff3366;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+.cart-dropdown {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 10px;
+}
+
+.cart-dropdown h4 {
+    margin-top: 0;
+    color: #ff6600;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item button {
+    background-color: #ff3366;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cart-item button:hover {
+    background-color: #ff6600;
+}
+
+
+.ok-btn {
+    background: linear-gradient(45deg, #00c853, #4caf50);
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+}
+
+.ok-btn:hover {
+    background: linear-gradient(45deg, #4caf50, #81c784);
+    transform: scale(1.05);
+}
+
+.ok-btn:active {
+    transform: scale(0.95);
+}
+
+.completion-message {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.completion-title {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    background-color: #f1f1f1;
+    border: none;
+    margin: 0 5px;
+    padding: 8px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .pagination button.active {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .pagination button:hover {
+    background-color: #ddd;
+  }
+  

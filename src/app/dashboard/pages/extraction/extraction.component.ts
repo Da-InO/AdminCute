@@ -1,125 +1,185 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ExtractionService } from 'src/app/services/extraction.service';
 
 @Component({
   selector: 'app-extraction',
   templateUrl: './extraction.component.html',
-  styleUrls: ['./extraction.component.css']
+  styleUrls: ['./extraction.component.css'],
 })
-export class ExtractionComponent {
-  tags = ['Drama', 'Comedia', 'Acción', 'Terror', 'Aventura'];
-  selectedTags: string[] = [];
-  minVotes = 100;
-  isExtracting = false;
-  progress = 0;
-  showMessage = false;
-  num_peliculas = 0;
-  num_segundos = 0;
+export class ExtractionComponent implements OnInit {
+  peliculas: any[] = [];
+  filteredPeliculas: any[] = [];
+  displayedPeliculas: any[] = []; // Películas que se muestran en la página actual
+  searchQuery: string = '';
+  isSearching: boolean = false;
+  isExtracting: boolean = false;
+  progress: number = 0;
+  searchCompleted: boolean = false;
+  noResults: boolean = false;
+  showError: boolean = false;
+  movieName: string = '';
+  showMessage: boolean = false;
+  startDate: string = '';
+  endDate: string = '';
+  num_peliculas: number = 0;
+  num_segundos: number = 0;
+  categories: string[] = ['Drama', 'Comedia', 'Acción', 'Terror', 'Aventura', 'Romance'];
+  selectedCategories: string[] = [];
+  cart: any[] = [];
+  isCartVisible: boolean = false;
 
-  // Aquí defines la lista de películas
-  peliculas = [
-    {
-        titulo: 'Coraline',
-        imagen: 'assets/coraline.jpg',
-        descripcion: 'Coraline es una niña aburrida y triste en su nuevo hogar, con extraños vecinos arriba...',
-        tags: ['1 h 40 min', '2009', '13+'],
-        categorias: ['Drama', 'Fantasía', 'Animación']
-    },
-    {
-        titulo: 'El Viaje de Chihiro',
-        imagen: 'assets/coraline.jpg',
-        descripcion: 'Una niña descubre un mundo secreto mientras intenta salvar a sus padres...',
-        tags: ['2 h 5 min', '2001', '7+'],
-        categorias: ['Fantasía', 'Aventura', 'Animación']
-    },
-    {
-        titulo: 'Your Name',
-        imagen: 'assets/coraline.jpg',
-        descripcion: 'Dos adolescentes descubren que están misteriosamente conectados a través de sus sueños...',
-        tags: ['1 h 52 min', '2016', '12+'],
-        categorias: ['Drama', 'Romance', 'Animación']
-    },
-    {
-        titulo: 'Coco',
-        imagen: 'assets/coraline.jpg',
-        descripcion: 'Un niño músico descubre la historia de su familia en el mundo de los muertos...',
-        tags: ['1 h 49 min', '2017', '7+'],
-        categorias: ['Familiar', 'Aventura', 'Animación']
-    },
-    {
-      titulo: 'Your Name',
-      imagen: 'assets/coraline.jpg',
-      descripcion: 'Dos adolescentes descubren que están misteriosamente conectados a través de sus sueños...',
-      tags: ['1 h 52 min', '2016', '12+'],
-      categorias: ['Drama', 'Romance', 'Animación']
-  },
-  {
-    titulo: 'Your Name',
-    imagen: 'assets/coraline.jpg',
-    descripcion: 'Dos adolescentes descubren que están misteriosamente conectados a través de sus sueños...',
-    tags: ['1 h 52 min', '2016', '12+'],
-    categorias: ['Drama', 'Romance', 'Animación']
-},
-{
-  titulo: 'Your Name',
-  imagen: 'assets/coraline.jpg',
-  descripcion: 'Dos adolescentes descubren que están misteriosamente conectados a través de sus sueños...',
-  tags: ['1 h 52 min', '2016', '12+'],
-  categorias: ['Drama', 'Romance', 'Animación']
-},
-{
-  titulo: 'Your Name',
-  imagen: 'assets/coraline.jpg',
-  descripcion: 'Dos adolescentes descubren que están misteriosamente conectados a través de sus sueños...',
-  tags: ['1 h 52 min', '2016', '12+'],
-  categorias: ['Drama', 'Romance', 'Animación']
-},
-{
-  titulo: 'Your Name',
-  imagen: 'assets/coraline.jpg',
-  descripcion: 'Dos adolescentes descubren que están misteriosamente conectados a través de sus sueños...',
-  tags: ['1 h 52 min', '2016', '12+'],
-  categorias: ['Drama', 'Romance', 'Animación']
-},
-{
-  titulo: 'Your Name',
-  imagen: 'assets/coraline.jpg',
-  descripcion: 'Dos adolescentes descubren que están misteriosamente conectados a través de sus sueños...',
-  tags: ['1 h 52 min', '2016', '12+'],
-  categorias: ['Drama', 'Romance', 'Animación']
-},
-];
+  // Paginación
+  currentPage: number = 1; // Página actual
+  itemsPerPage: number = 10; // Cantidad de películas por página
+  totalPages: number = 1; // Número total de páginas
 
+  constructor(private extractionService: ExtractionService) {}
 
-  toggleTag(tag: string) {
-    if (this.selectedTags.includes(tag)) {
-      this.selectedTags = this.selectedTags.filter(t => t !== tag);
-    } else {
-      this.selectedTags.push(tag);
+  ngOnInit(): void {
+    this.loadMovies();
+  }
+
+  // Carga todas las películas
+  loadMovies(): void {
+    this.extractionService.getPeliculas().subscribe((data: any) => {
+      this.peliculas = data;
+      this.filteredPeliculas = data;
+      this.updatePagination(); // Actualiza los datos para la paginación
+    });
+  }
+
+  // Actualiza los datos de paginación
+  updatePagination(): void {
+    this.totalPages = Math.ceil(this.filteredPeliculas.length / this.itemsPerPage);
+    this.changePage(1); // Cambia a la primera página por defecto
+  }
+
+  // Cambia la página actual
+  changePage(page: number): void {
+    this.currentPage = page;
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.displayedPeliculas = this.filteredPeliculas.slice(startIndex, endIndex);
+  }
+
+  // Simula la búsqueda con filtros de nombre, categorías y fechas
+  simulateSearch(event: KeyboardEvent): void {
+    if (event.key === 'Enter' && this.searchQuery.trim()) {
+      this.filteredPeliculas = this.peliculas.filter((pelicula) => {
+        const matchesName = pelicula.titulo.toLowerCase().includes(this.searchQuery.toLowerCase());
+        const matchesCategory =
+          this.selectedCategories.length === 0 ||
+          this.selectedCategories.some((category) => pelicula.categorias.includes(category));
+        const releaseDate = pelicula.release_date ? new Date(pelicula.release_date) : null;
+        const startDate = this.startDate ? new Date(this.startDate) : null;
+        const endDate = this.endDate ? new Date(this.endDate) : null;
+        const matchesDate =
+          (!startDate || (releaseDate && releaseDate >= startDate)) &&
+          (!endDate || (releaseDate && releaseDate <= endDate));
+        return matchesName && matchesCategory && matchesDate;
+      });
+
+      this.noResults = this.filteredPeliculas.length === 0;
+      this.updatePagination(); // Actualiza la paginación después de buscar
     }
   }
 
-  startExtraction() {
+  // Maneja la selección de categorías
+  toggleCategory(category: string): void {
+    if (this.selectedCategories.includes(category)) {
+      this.selectedCategories = this.selectedCategories.filter((c) => c !== category);
+    } else {
+      this.selectedCategories.push(category);
+    }
+    this.applyFilters();
+  }
+
+  // Filtra las películas según fechas y categorías seleccionadas
+  applyFilters(): void {
+    const startDate = this.startDate ? new Date(this.startDate) : null;
+    const endDate = this.endDate ? new Date(this.endDate) : null;
+
+    this.filteredPeliculas = this.peliculas.filter((pelicula) => {
+      const matchesCategory =
+        this.selectedCategories.length === 0 ||
+        this.selectedCategories.some((category) => pelicula.categorias.includes(category));
+      const releaseDate = pelicula.release_date ? new Date(pelicula.release_date) : null;
+      const matchesDate =
+        (!startDate || (releaseDate && releaseDate >= startDate)) &&
+        (!endDate || (releaseDate && releaseDate <= endDate));
+      return matchesCategory && matchesDate;
+    });
+
+    this.updatePagination(); // Actualiza la paginación después de aplicar filtros
+  }
+
+  // Maneja el cambio de fechas
+  handleDateChange(): void {
+    this.applyFilters();
+  }
+
+  // Borra los filtros aplicados
+  clearFilters(): void {
+    this.searchQuery = '';
+    this.startDate = '';
+    this.endDate = '';
+    this.selectedCategories = [];
+    this.filteredPeliculas = [...this.peliculas];
+    this.noResults = false;
+    this.showMessage = false;
+    this.updatePagination(); // Actualiza la paginación después de borrar filtros
+  }
+
+  // Simula la extracción con barra de carga
+  startExtraction(): void {
+    if (this.cart.length === 0) {
+      alert('El carrito está vacío. Agrega películas antes de extraer.');
+      return;
+    }
+
     this.isExtracting = true;
     this.showMessage = false;
     this.progress = 0;
-    this.num_segundos = 5; // Tiempo en segundos de la simulación de extracción
 
-    const extractionInterval = setInterval(() => {
+    const interval = setInterval(() => {
       if (this.progress >= 100) {
-        clearInterval(extractionInterval);
+        clearInterval(interval);
         this.isExtracting = false;
+
+        this.num_peliculas = this.cart.length;
+        this.num_segundos = 5; // Simula el tiempo de extracción
         this.showMessage = true;
-        this.num_peliculas = this.peliculas.length; // Número de películas extraídas
+
+        // Vaciar el carrito después de la extracción
+        this.cart = [];
       } else {
-        this.progress += 10;
+        this.progress += 20;
       }
-    }, 500);
+    }, 300);
   }
 
-  updateRange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const value = ((+input.value - +input.min) / (+input.max - +input.min)) * 100;
-    input.style.setProperty('--value', `${value}%`);
-    this.minVotes = +input.value;
+  // Agrega una película al carrito
+  addMovie(movie: any): void {
+    if (!this.cart.includes(movie)) {
+      this.cart.push(movie);
+      alert(`Película "${movie.titulo}" añadida al carrito.`);
+    } else {
+      alert(`La película "${movie.titulo}" ya está en el carrito.`);
+    }
+  }
+
+  // Muestra/oculta el carrito
+  toggleCartVisibility(): void {
+    this.isCartVisible = !this.isCartVisible;
+  }
+
+  // Elimina una película del carrito
+  removeMovie(movie: any): void {
+    this.cart = this.cart.filter((m) => m !== movie);
+  }
+
+  // Cierra el mensaje de extracción completa
+  closeMessage(): void {
+    this.showMessage = false;
   }
 }

@@ -14,6 +14,8 @@ import { SearchComponent } from './dashboard/pages/search/search.component';
 import { UsersComponent } from './dashboard/pages/users/users.component';
 import { FormsModule } from '@angular/forms'; // Asegúrate de importar FormsModule
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     BrowserModule,
     FormsModule,
     NgApexchartsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

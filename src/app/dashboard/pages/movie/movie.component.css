@@ -32,6 +32,11 @@ h2 {
     margin-bottom: 20px;
 }
 
+h3 {
+    display: flex;
+    justify-content: start;
+}
+
 .movie-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -54,13 +59,14 @@ h2 {
 
 .movie-card h3 {
     margin: 10px 0;
-    font-size: 16px;
+    font-size: 24px;
 }
 
 .info {
     display: flex;
     gap: 10px;
-    justify-content: center;
+    justify-content: start;
+    /* Cambiado de center a start */
     font-size: 12px;
     margin: 10px 0;
 }
@@ -68,22 +74,27 @@ h2 {
 .tags {
     display: flex;
     gap: 5px;
-    justify-content: center;
+    justify-content: start;
+    /* Cambiado de center a start */
     margin-top: 10px;
 }
 
 .tag {
-    background-color: #ff6b6b;
+    background: linear-gradient(to right, #FE014E, #ff8c6b);
+    /* Degradado rojo-naranja */
     color: white;
     padding: 3px 8px;
     border-radius: 12px;
-    font-size: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
 }
 
 .actions {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    border-radius: 15px;
 }
 
 .pagination {
@@ -124,4 +135,56 @@ h2 {
 
 .btn:hover {
     background-color: #ff4040;
+}
+
+.liked {
+    background-color: #ff4040;
+    /* Color al hacer like */
+}
+
+/* Estilo para los campos adicionales */
+.additional-info {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.info-row p {
+    margin: 0;
+}
+
+.info span {
+    background-color: #e0e0e0;
+    /* Fondo plomo */
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    display: inline-block;
+    color: #333;
+    /* Texto oscuro */
+}
+
+.movie-list .movie-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-list .movie-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para la tarjeta de detalles */
+.details .movie-card {
+    transition: none;
+    /* Sin transición para la tarjeta de detalles */
+    box-shadow: none;
+    /* Sin sombra para la tarjeta de detalles */
 }

@@ -1,51 +1,103 @@
 <app-header></app-header>
 <div class="dashboard-container">
-    <div class="dashboard">
+    <div class="statistics-row">
         <div class="card red">
-            <div class="card-content">
-                <i class="fas fa-users card-icon"></i>
-                <div class="card-text">
-                    <h3>Total de usuarios</h3>
-                    <p>12,234</p>
-                </div>
+            <i class="fas fa-users card-icon"></i>
+            <div class="card-text">
+                <h3>Total de usuarios</h3>
+                <p>{{ totalUsers | number }}</p>
             </div>
         </div>
         <div class="card">
-            <div class="card-content">
-                <i class="fas fa-users card-icon"></i>
-                <div class="card-text">
-                    <h3>Total de usuarios</h3>
-                    <p>12,234</p>
-                </div>
+            <i class="fas fa-thumbs-up card-icon"></i>
+            <div class="card-text">
+                <h3>Total de Me Gusta</h3>
+                <p>{{ totalLikes | number }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <i class="fas fa-comment card-icon"></i>
+            <div class="card-text">
+                <h3>Comentarios Totales</h3>
+                <p>{{ totalComments | number }}</p>
+            </div>
+        </div>
+        <div class="card">
+            <i class="fas fa-share card-icon"></i>
+            <div class="card-text">
+                <h3>Compartidos</h3>
+                <p>{{ totalShares | number }}</p>
+            </div>
+        </div>
+        <div class="card" id="interactionsCard" (click)="openModal()">
+            <i class="fas fa-chart-pie card-icon"></i>
+            <div class="card-text">
+                <h3>Promedio de Interacciones</h3>
+                <p>{{ avgInteractions }}</p>
+            </div>
+        </div>
+
+        <!-- Modal para el gráfico -->
+        <div id="chartModal" class="modal" *ngIf="showModal">
+            <div class="modal-content">
+                <span class="close" (click)="closeModal()">&times;</span>
+                <h4>Distribución de Interacciones</h4>
+                <canvas id="pieChart"></canvas>
             </div>
         </div>
     </div>
-    <div class="space"></div> <!-- Espacio en blanco a la derecha -->
-</div>
 
-<div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombres</th>
-                <th>Correos</th>
-                <th>Teléfono</th>
-                <th>Fecha de nacimiento</th>
-                <th>Roles</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Nombres</td>
-                <td>Correos</td>
-                <td>Teléfono</td>
-                <td>10/10/2000</td>
-                <td>Rol</td>
-                <td><button class="delete-button">Eliminar</button></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-container">
+        <h3>Información de Usuarios</h3>
+
+        <!-- Contenedor de búsqueda y filtro -->
+        <div class="search-filter-container">
+            <!-- Barra de búsqueda -->
+            <div class="search-input">
+                <input type="text" placeholder="Buscar por nombre o email..." [(ngModel)]="searchQuery"
+                    (input)="filterUsers()" />
+                <i class="fas fa-search"></i>
+            </div>
+            <!-- Filtro por rol -->
+            <div class="filter-dropdown">
+                <select [(ngModel)]="selectedRole" (change)="filterUsers()">
+                    <option value="">Todos los roles</option>
+                    <option *ngFor="let role of availableRoles" [value]="role">{{ role }}</option>
+                </select>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombres</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Roles</th>
+                    <th>Verificado</th>
+                    <th>Último Inicio</th>
+                    <th>Activo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of filteredUsers">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone_number }}</td>
+                    <td>{{ user.birth_date }}</td>
+                    <td>{{ user.roles.join(', ') }}</td>
+                    <td>{{ user.is_verified ? 'Sí' : 'No' }}</td>
+                    <td>{{ user.last_login }}</td>
+                    <td>{{ user.is_active ? 'Sí' : 'No' }}</td>
+                    <td>
+                        <button class="delete-button" (click)="deleteUser(user.id)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
